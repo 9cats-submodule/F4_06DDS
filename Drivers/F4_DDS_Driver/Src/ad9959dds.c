@@ -238,31 +238,6 @@ void Init_AD9959(void)
 	IntReset(); //AD9959复位 
 	
 	WriteData_AD9959(FR1_ADD,3,FR1_DATA,1);//写功能寄存器1 
-	// WriteData_AD9959(FR2_ADD,2,FR2_DATA,0);
-	// WriteData_AD9959(CFR_ADD,3,CFR_DATA,1); 
-	// WriteData_AD9959(CPOW0_ADD,2,CPOW0_DATA,0);
-	// WriteData_AD9959(ACR_ADD,3,ACR_DATA,0);
-	// WriteData_AD9959(LSRR_ADD,2,LSRR_DATA,0); 
-	// WriteData_AD9959(RDW_ADD,2,RDW_DATA,0); 
-	// WriteData_AD9959(FDW_ADD,4,FDW_DATA,1); 
-	//写入初始频率 
-	sweepfreq.flag=0; 
-	sweepfreq.start=1e6; 
-	sweepfreq.step=1e6; 
-	sweepfreq.time=10; 
-	sweepfreq.end=40*1e6; 
-	
-	sinwave.freq = 1000000; 
-	sinwave.phase = 0; 
-	sinwave.amp = 50; 
-	
-	Out_freq(0,sinwave.freq); 
-	Write_Phase(0, sinwave.phase); 
-	Out_mV(0, sinwave.amp); 
-	Out_freq(1,1000000); 
-	Write_Phase(1, 10); 
-	Out_mV(1, 100); 
-	
 	
 	delay_ms(200); 
 }
@@ -270,7 +245,7 @@ void Init_AD9959(void)
 void Out_mV(u8 ch, float nmV) 
 { 
 	nmV=nmV/500*1024; 
-	if(nmV>1023)nmV=1023;//范围保护 
+	if(nmV>1023)nmV=1023;//范围保护
 	Write_Amplitude(ch,nmV);
 }
 void Out_freq(u8 ch, u32 freq) 
@@ -279,9 +254,4 @@ void Out_freq(u8 ch, u32 freq)
 	if(freq<FreqMin)freq=FreqMin;//范围保护 
 	Write_frequence(ch,freq); 
 }
-
-//扫频函数 
-/*
-更改好sweepfreq结构体的参数后，直接调用本函数将扫频生效 
-*/
 

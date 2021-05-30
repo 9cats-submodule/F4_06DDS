@@ -95,7 +95,8 @@ int main(void)
   LCD_Init();
   tp_dev.init();
   Init_AD9959();
-  Out_freq(0, 1000);
+  
+  Out_freq(0, 1000000);
   Out_mV(0, 1000);
 
   Out_freq(1, 1000);
@@ -106,6 +107,13 @@ int main(void)
 
   Out_freq(3, 1000);
   Out_mV(3, 1000);
+
+
+  LCD_ShowString(30,40,210,24,24,(uint8_t *)"MINI STM32F4");
+  LCD_ShowString(30,70,200,16,16,(uint8_t *)"TFTLCD TEST");
+  LCD_ShowString(30,90,200,16,16,(uint8_t *)"ATOM@ALIENTEK");
+  LCD_ShowString(30,110,200,16,16,(uint8_t *)"The First Test");
+  LCD_ShowString(30,130,200,12,12,(uint8_t *)"2021/4/8");
 
 
   POINT_COLOR=RED;
